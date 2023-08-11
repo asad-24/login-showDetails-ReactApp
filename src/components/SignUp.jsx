@@ -1,61 +1,76 @@
 import React, { useState } from "react";
 
-export default function SignUp() {
 
-  const nameHandle=(event)=>{
-   setname(event.target.value);
-  //  console.log("after change",name)
-  }
-  const emailHandle=(event)=>{
-   setemail(event.target.value);
-  //  console.log("after change",email)
-  }
-  const passwordHandle=(event)=>{
-   setpassword(event.target.value);
-  //  console.log("after change",password)
-  }
-    // State variables for user input
+export default function SignUp() {
+  const nameHandle = (event) => {
+    setname(event.target.value);
+    let fullName=event.target.value
+     console.log("after change",fullName)
+    localStorage.setItem("name",fullName)
+  };
+  const emailHandle = (event) => {
+    setemail(event.target.value);
+    let fullemail=event.target.value
+     console.log("after change",fullemail)
+    localStorage.setItem("email",fullemail)
+  };
+  const passwordHandle = (event) => {
+    setpassword(event.target.value);
+    let fullpassword=event.target.value
+    console.log("after change",fullpassword)
+    localStorage.setItem("password",fullpassword)
+  };
+  // State variables for user input
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
- 
-  const [hide, sethide] = useState('show user Details');
+
+
+  const [hide, sethide] = useState("show user Details");
 
   const [show, setshow] = useState(false);
   const [btnShow, setbtnShow] = useState(false);
 
+  const formHandle=(event)=>{
+    event.preventDefault();
+  
+  }
+
   // if signup successfully then show user details
-  const signUpBtn=()=>{
-    if(btnShow===true){
-      setbtnShow(false)
+  const signUpBtn = () => {
+    if (btnShow === true) {
+      setbtnShow(false);
+    } else {
+      setbtnShow(true);
     }
-    else{
-      setbtnShow(true)
-    }
-  }
+    setname("")
+    setemail("")
+    setpassword("")
+  };
   // this function hide or show user detail by useState
-  const showDetail=()=>{
-    if(show===true){
-      setshow(false)
-      sethide('show user detail')
+  const showDetail = () => {
+    if (show === true) {
+      setshow(false);
+      sethide("show user detail");
+    } else {
+      setshow(true);
+      sethide("hide user detail");
     }
-    else{
-      setshow(true)
-      sethide('hide user detail')
-    }
-  }
+  };
+ 
 
   console.log(name);
   return (
     <div className="container-fluid main-container-bg">
       <div className="container">
         <div className="row txt-col ">
-          <div className="col-lg-7 col-md-4 col-12  d-flex justify-content-center align-items-center  flex-column">
+          <div className="col-lg-7 col-md-6 col-12  d-flex justify-content-center align-items-center  flex-column">
             <div className="card card-width">
               <div className="card-body ">
-                <input
+              <form onSubmit={formHandle}>
+              <input
                   type="text"
-            
+                  value={name}
                   onChange={nameHandle}
                   className="form-control"
                   id="exampleFormControlInput0"
@@ -63,7 +78,7 @@ export default function SignUp() {
                 />
                 <input
                   type="email"
-          
+                  value={email}
                   onChange={emailHandle}
                   className="form-control mt-3"
                   id="exampleFormControlInput1"
@@ -71,12 +86,13 @@ export default function SignUp() {
                 />
                 <input
                   type="password"
-                 
+                  value={password}
                   onChange={passwordHandle}
                   className="form-control mt-3"
                   id="exampleFormControlInput2"
                   placeholder="Password"
                 />
+            
                 <button
                   type="submit"
                   className="btn btn-primary mt-3 w-100 fw-bold"
@@ -84,6 +100,7 @@ export default function SignUp() {
                 >
                   Sign up
                 </button>
+                </form >
                 <p className="text-center text-primary">forgot password?</p>
                 <hr />
                 <button
@@ -96,19 +113,23 @@ export default function SignUp() {
             </div>
           </div>
 
-          <div className="col-lg-5 col-md-4 col-12   d-flex justify-content-center align-items-center  flex-column">
-        {btnShow &&  <button
-                  type="submit"
-                  className="btn btn-primary mt-3 w-50 fw-bold"
-                  onClick={showDetail}
-                >
-                  {hide }
-                </button>}
-        {  show &&(  <ul className="detail-list">
-              <li className="detail" >Name : {name} </li>
-              <li className="detail">Email : {email} </li>
-              <li className="detail">Password : {password} </li>
-            </ul>)}
+          <div className="col-lg-5 col-md-6 col-12   d-flex justify-content-center align-items-center  flex-column">
+            {btnShow && (
+              <button
+                type="submit"
+                className="btn btn-primary mt-3 w-50 fw-bold"
+                onClick={showDetail}
+              >
+                {hide}
+              </button>
+            )}
+            {show && (
+              <ul className="detail-list">
+                <li className="detail">Name : {localStorage.getItem("name")} </li>
+                <li className="detail">Email : {localStorage.getItem("email")} </li>
+                <li className="detail">Password :{localStorage.getItem("password")}</li>
+              </ul>
+            )}
           </div>
         </div>
       </div>
