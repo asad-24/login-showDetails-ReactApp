@@ -31,10 +31,7 @@ export default function SignUp() {
   const [show, setshow] = useState(false);
   const [btnShow, setbtnShow] = useState(false);
 
-  const formHandle=(event)=>{
-    event.preventDefault();
-  
-  }
+
 
   // if signup successfully then show user details
   const signUpBtn = () => {
@@ -67,7 +64,7 @@ export default function SignUp() {
           <div className="col-lg-7 col-md-6 col-12  d-flex justify-content-center align-items-center  flex-column">
             <div className="card card-width">
               <div className="card-body ">
-              <form onSubmit={formHandle}>
+              <form >
               <input
                   type="text"
                   value={name}
