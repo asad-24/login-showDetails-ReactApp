@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 
-export default function SignUp() {
+export default function SignUp(props) {
+  
   const nameHandle = (event) => {
     setname(event.target.value);
     let fullName=event.target.value
@@ -46,6 +47,7 @@ export default function SignUp() {
     setname("")
     setemail("")
     setpassword("")
+    props.useAlert("signUp successfully","success")
   };
   // this function hide or show user detail by useState
   const showDetail = () => {
