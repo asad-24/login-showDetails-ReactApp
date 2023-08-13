@@ -63,18 +63,19 @@ export default function SignUp(props) {
 
   console.log(name);
   return (
-    <div className="container-fluid main-container-bg">
+    <div className={`container-fluid main-container-bg bg-${props.mode==='light'?'light':'dark'}`}>
       <div className="container">
         <div className="row txt-col ">
           <div className="col-lg-7 col-md-6 col-12  d-flex justify-content-center align-items-center  flex-column">
-            <div className="card card-width">
+            <div className="card card-width ">
               <div className="card-body ">
               <form onSubmit={formHandle}>
               <input
+              
                   type="text"
                   value={name}
                   onChange={nameHandle}
-                  className="form-control"
+                  className="form-control "
                   id="exampleFormControlInput0"
                   placeholder="Enter Your Name"
                 />
